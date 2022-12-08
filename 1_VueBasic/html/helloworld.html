@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>hello vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body> 
+    
+    <!--创建一个容器-->>
+    <!--Vue中使用双大括号来接受Vue对象中对应变量的值-->>
+    <div id = "div01">
+        <h2>Hello,{{name}},{{address}}</h2>  
+    </div>
+    
+    <script type="text/javascript" >
+       Vue.config.productionTip = false
+       /*创建Vue实例
+       * 1,new Vue({})是个构造函数，创建了一个Vue对象，“{}”是个配置对象
+       * 2，使用Vue之前必须先new一个这样的函数
+       */
+       const x = new Vue({
+                el:'#div01',  //el : element，类似于CSS中的选择器，在这里把Vue对象个#div01表示的容器关联起来了。
+                data:{
+                    name:"Vue",
+                    address:"邯郸"
+                }
+            })
+
+    </script>
+
+</body>
+</html>
