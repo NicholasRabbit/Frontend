@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>  
+
+    <!--
+        模板语法有两种，作用和区别如下：
+        1，插值语法。
+             功能：解析标签体的内容；
+             写法：{{xxx}},xxx是js表达式，可以直接读取到vue实例中data中的所有属性。
+        2，指令语法。
+             功能：解析标签属性内容，还可以解析标签体内容，绑定事件等等；
+             写法：<a v-bind:href="xxx">, v-bind可以简写为一个冒号“:”, xxx也是js表达式，可以读取到data中的所有属性
+             其他：Vue中有很多指令，格式都是v-...   
+
+    -->
+    
+    
+    <div id="div01">
+        
+        <h2>插值语法</h2>
+        <h2>{{name}}</h2>
+
+        <h2>指令语法</h2>
+        <a href="url">新浪1</a>  <br>
+        <a v-bind:href="url">新浪2</a>  <br><!--指令语法的写法-->
+        <a :href="url">必应</a>      <br>  <!--缩写为 “：”也可以-->
+        <a v-bind:href="url.toUpperCase()">新浪2</a>  <br>  <!--指令语法的变量也可以调用方法-->
+        
+
+        <h2>多层级读取data中的数据</h2>
+        <h2>{{user.id}},{{user.age}}</h2>
+
+
+    </div>
+
+    
+    <script type="text/javascript">
+       
+        Vue.config.productionTip = false
+        new Vue({
+            el:"#div01",
+            data:{
+                name:"你好",
+                url:"http://www.sina.com.cn",
+                user:{
+                    id:"1001",
+                    age:39
+                }
+            }
+            
+
+        })
+
+
+    </script>
+
+</body>    
