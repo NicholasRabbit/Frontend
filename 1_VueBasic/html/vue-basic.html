@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>hello vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body> 
+    
+    
+    <!--Vue中使用双大括号来接受Vue对象中对应变量的值-->
+    <!--
+        1,如果要要使用Vue，必须创建一个Vue实例，即new Vue({}),新建一个Vue对象;
+        2,在Vue实例中通过el指定的值绑定容器，注意Vue实例对象和容器只能一对一；
+        3,在容器中使用{{xxx}}来接受对应Vue实例中的赋值，xxx是js表达式
+          js表达式和js语句的区别：
+          1)一个表达式会产生一个值，放在使用的地方
+             (1)a
+             (2)a + b
+             (3)doSome(10)
+             (4)x === y ? 'a' : 'b';
+          2)js语句，指一般执行的语句
+             if(){}
+             for(){}   
+        4,实际开发中Vue实例会配合多个组件一起使用，以应付容器中需要大量数据，而在Vue实例中需要写太多对应变量的情况，
+          如果所有变量都写在一个Vue实例里太复杂了。
+        5，一旦Vue实例中data{}中的变量的值改变，对应容器中的也会改变  
+    -->
+    
+    
+    <!--创建一个容器-->
+    <div id = "div01">
+        <h2>Hello,{{name}},{{address}}</h2>  
+        <h2>{{name.toUpperCase()}}</h2>   <!--可以调用Vue的方法-->
+        <h2>{{Date.now()}}</h2>  <!--也可以放自带的函数表达式-->
+
+    </div>
+    
+    <script type="text/javascript" >
+       Vue.config.productionTip = false
+       /*创建Vue实例
+       * 1, new Vue({})是个构造函数，创建了一个Vue对象，“{}”是个配置对象
+       * 2，使用Vue之前必须先new一个这样的函数
+       * 3, 容器和Vue实例只能是一对一的关系
+       */
+       const x = new Vue({
+                el:'#div01',  //el : element，类似于CSS中的选择器，在这里把Vue对象个#div01表示的容器关联起来了。
+                data:{
+                    name:"Vue Basic",
+                    address:"邯郸"
+                }
+            })
+
+    </script>
+
+</body>
+</html>
