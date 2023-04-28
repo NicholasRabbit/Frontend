@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>28,unbind( )解除事件绑定范例</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            //one()方法，为标签绑定一个一次性事件
+            $("#rl").one("click",function(){
+               alert($(this).text());
+            });
+
+            //unbind()方法范例，解除事件绑定
+            $("li:not(#rl)").click(function(){
+                alert($(this).text());   //jQuery对象的写法
+                //alert(this.firstChild.nodeValue);  //this是DOM对象写法
+                if(this.id == "bj"){  //如果id="bj"则执行一次点击事件后取消绑定
+                    $("#bj").unbind("click");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪种开发语言?</p>
+<ul id="language">
+    <li>C</li>
+    <li>Java</li>
+    <li>.NET</li>
+    <li>PHP</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="atguigu"/>
+
+</body>
+</html>

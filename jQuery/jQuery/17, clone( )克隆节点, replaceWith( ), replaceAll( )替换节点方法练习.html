@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>17, clone( )克隆节点, replaceWith( ), replaceAll( )替换节点方法练习</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            //点击显示<li>标签中的内容
+            $("li").click(function(){
+               alert($(this).val());
+            });
+
+            //1,clone(..)方法，克隆北京节点，并插入到表格之中, 克隆的标签和之前的标签各个属性值一摸一样，因此需要更改
+            //  clone() : 无参方法，只克隆节点不包含事件
+            //  clone(true) : 加上参数“true”则表示克隆的新节点包含源节点的事件
+            //这里也用到了jQuery方法的连缀特性
+            $("#bj").clone(true).attr("id","ny")
+                            .attr("name","NewYork")
+                            .text("纽约").css("background", "red")  //调用text(..)方法就是给标签中间的文本赋值
+                            .appendTo($("#city"));
+
+            //2,replaceWith/replaceAll()方法，两个方法作用一样，只是主宾语互换而已
+            //新创建一个节点替换替换红警节点
+            $("#btn1").click(function(){
+                var flag = confirm("确定替换红警,实况节点？");
+                if(flag){
+                    $("<li id='sc'>星际争霸</li>").replaceAll($("#rl"));     //replaceAll(..)被替换的节点做宾语
+                    //这里使用了层次选择器和基本过滤选择器，即选择<div>“id=game”的标签的下标为1的子标签<li>
+                    $("#game li:eq(1)").replaceWith($("<li id='fifa'>FIFA</li>"));    //replaceWith(..)被替换的节点作主语
+                }
+            });
+
+            //3, 使用clone(..)和replaceWith(..)方法互换两个节点:首尔和魔兽
+            //   因为replaceWith/all(..)方法有移除被替换的节点的功能，所以实现互换必须和clone(..)方法连用
+            $("#btn2").click(function () {
+                //第一步，克隆"#se"节点
+                var $seClone = $("#se").clone(true);
+                //第二步，把魔兽“#wc”节点替换为克隆出的节点，不要动原来的"#se"节点，后面要用
+                var $wcNode = $("#wc").replaceWith($seClone);  //注意$("#wc")调用方法后返回值还是它本身
+                //第三步，把首尔“#se”替换为"#wc"
+                $("#se").replaceWith($wcNode);
+            });
+
+
+
+        })
+    </script>
+</head>
+<body>
+
+<button id="btn1">替换</button>
+<button id="btn2">互换首尔和魔兽节点</button>
+
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li id="sh">上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li id="pes">实况</li>
+    <li>极品飞车</li>
+    <li id="wc">魔兽</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="Tom"/>
+
+</body>
+</html>

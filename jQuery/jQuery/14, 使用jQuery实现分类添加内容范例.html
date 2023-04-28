@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14, 使用jQuery实现分类添加内容范例</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+        //使用jQuery实现按用户选择的类型type添加到不同的位置，城市或者游戏的节点下
+        $(document).ready(function () {
+            //展示节点内容的回调函数
+            function showContent(li){
+                alert($(li).text());
+            }
+
+            //点击<li>事件
+            $("li").click(function(){
+               showContent(this);
+            });
+
+
+            /*要求：
+              1,点击submit时，如果文本框内容为空，提示用户添加；
+              2,文本框内容前后空格要修剪，文本内容为空时提醒用户输入内容；
+              3,根据用户的单选，把节点添加到指定位置；
+            */
+            $(":submit").click(function(){
+                //获取type='radio'，name='type'且被选中的jQuery对象, 它是一个数组
+                var $type = $(":radio[name='type']:checked");
+                if($type.length == 0 ){
+                    alert("请选择类型");
+                    return false;  //跟JS的相应函数一样，如果这里返回false，则取消submit的行为，因为没有值，不需要提交
+                }
+                //获取被选中的type值，把jQuery对象转换为DOM对象，后面要用
+                var type = $type.val();
+                //获取文本框内的值
+                var $name = $(":text[name='name']");
+                var name = $name.val();
+                name = $.trim(name);  //修建前后空格，注意$.trim(..)时jQuery的内置方法
+                $name.val(name);  //使用val(..)方法给name赋值
+                if(name == ""){
+                    alert("请输入内容！");
+                    return false;
+                }
+                //插入节点到指定位置,给id="#+type"的<ul>插入节点，这里使用到了jQuery的方法的连缀用法
+                $("<li>" + name + "</li>").appendTo($("#"+type)).click(function(){
+                    showContent(this);
+                });
+
+                //这里仅作练习，不需提交到后端，所以返回"false"
+                return false;
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+
+<p>你喜欢哪个城市?</p>
+
+<ul id="city">
+    <li id="bj">北京</li>
+    <li>上海</li>
+    <li>东京</li>
+    <li>首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+
+<form action="dom-7.html" name="myform">
+
+    <input type="radio" name="type" value="city">城市
+    <input type="radio" name="type" value="game">游戏
+
+    name: <input type="text" name="name"/>
+
+    <input type="submit" value="Submit" id="submit"/>
+
+</form>
+
+
+</body>
+</html>

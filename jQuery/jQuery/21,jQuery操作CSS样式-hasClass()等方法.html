@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>21,jQuery操作CSS样式-hasClass()等方法</title>
+
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body {font-size:12px;text-align:center;}
+        a { color:#04D; text-decoration:none;}
+        a:hover { color:#F50; text-decoration:underline;}
+        .SubCategoryBox {width:600px; margin:0 auto; text-align:center;margin-top:40px;}
+        .SubCategoryBox ul { list-style:none;}
+        .SubCategoryBox ul li { display:block; float:left; width:200px; line-height:20px;}
+        .showmore { clear:both; text-align:center;padding-top:10px;}
+        .showmore a { display:block; width:120px; margin:0 auto; line-height:24px; border:1px solid #AAA;}
+
+        .showmore a span { padding-left:15px; background:url(img/down.gif) no-repeat 0 0;}
+
+        .promoted a { color:#F50;}
+    </style>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        //一般css脚本会指定某个class的样式，因此对class进行操作可改变标签的样式
+
+        $(function(){
+            //1,hasClass(..),判断某个元素的class是否为指定值，返回值是boolean，相当于is("."+class);
+            var hasClass = $("div").hasClass("SubCategoryBox");
+            alert("hasClass==>" + hasClass);
+            //2,removeClass(..),移除某个元素的class属性,同时就移除了这个class所绑定的css样式
+            $("#btn1").click(function(){
+                confirm("确定移除class?");
+                $("div:first").removeClass("SubCategoryBox");   //div:first:选择第一个<div>
+            });
+            //3,addClass(..),添加
+            $("#btn2").click(function(){
+               var flag = confirm("确定添加class?");
+               if(flag){
+                   $("div:first").addClass("SubCategoryBox");
+               }
+            });
+            //4,toggleClass(..):切换样式，即通过移除和添加class来达到改变样式的目的，样式通过class来进行操作
+            $(".showmore").click(function () {
+                $("div:first").toggleClass("SubCategoryBox");  //有该class则移除，没有则添加，依次进行切换
+                return false;
+            });
+
+            //5,设置元素的透明度属性，opacity, 跟设置背景background用法一样
+            $("div:first").css("opacity",0.5);
+
+            //6,设置宽度和高度
+            alert("width==>" + $("div:first").width());
+            alert("height==>" + $("div:first").height());
+            $("#btn3").click(function () {
+                $("div:first").width(800);
+                $("div:first").height(60);
+            })
+
+            //7,offset()方法，获取元素在页面的坐标,返回的对象包含两个属性top,left
+            alert("offset()==>" + $("div:first").offset());
+            alert("top==>" + $("div:first").offset().top);
+            alert("left==>" + $("div:first").offset().left);
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+<div class="SubCategoryBox">
+
+    <ul>
+        <li ><a href="#">佳能</a><i>(30440) </i></li>
+        <li ><a href="#">索尼</a><i>(27220) </i></li>
+        <li ><a href="#">三星</a><i>(20808) </i></li>
+        <li ><a href="#">尼康</a><i>(17821) </i></li>
+        <li ><a href="#">松下</a><i>(12289) </i></li>
+        <li ><a href="#">卡西欧</a><i>(8242) </i></li>
+        <li ><a href="#">富士</a><i>(14894) </i></li>
+        <li ><a href="#">柯达</a><i>(9520) </i></li>
+        <li ><a href="#">宾得</a><i>(2195) </i></li>
+        <li ><a href="#">理光</a><i>(4114) </i></li>
+        <li ><a href="#">奥林巴斯</a><i>(12205) </i></li>
+        <li ><a href="#">明基</a><i>(1466) </i></li>
+        <li ><a href="#">爱国者</a><i>(3091) </i></li>
+        <li ><a href="#">其它品牌相机</a><i>(7275) </i></li>
+    </ul>
+    <div class="showmore">
+        <a href="more.html"><span>显示全部品牌</span></a>
+    </div>
+    <div>
+        <button id="btn1">移除class</button>
+        <button id="btn2">添加class</button>
+        <button id="btn3">改变尺寸</button>
+    </div>
+</div>
+
+</body>
+</html>

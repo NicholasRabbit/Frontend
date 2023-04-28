@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>18,包裹节点方法wrap ( )等相关练习</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+        //这三个方法仅作了解
+        $(function(){
+
+            $("#btn1").click(function(){
+                //1, wrap(..)方法，被包裹的节点作主语。此方法把整个标签包裹住了
+                $("#city li").wrap("<font color='red'></font>");  //把”#city“中的<li>用<font>包裹起来
+
+                //2, wrapAll(..)方法，与wrap()方法一样
+                $("#game li").wrap("<font color='aqua'></font>");
+
+                //3, wrapInner(..)，这个方法是包裹标签内部的文字，与上两个不同，参照浏览器的代码。
+                $("#sport li").wrapInner("<font color='#cd853f'></font>");
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<button id="btn1">包裹</button>
+
+
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li id="sh">上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li id="pes">实况</li>
+    <li>极品飞车</li>
+    <li id="wc">魔兽</li>
+</ul>
+
+<p>你喜欢哪项运动</p>
+<ul id="sport">
+    <li id="soccer">足球</li>
+    <li id="baseball">棒球</li>
+    <li>篮球</li>
+    <li>乒乓球</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="Tom"/>
+
+</body>
+</html>

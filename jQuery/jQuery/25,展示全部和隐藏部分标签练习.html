@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25,展示全部和隐藏部分标签练习</title>
+
+    <link rel="stylesheet" type="text/css" href="css/brand.css">
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            //用jQuery实现：
+
+            //第一步，首先获取要隐藏的从“爱国则”到“富士”部分品牌标签，转成jQuery对象
+            var $hideBrands = $("li:gt(5):lt(7)");  //第一种写法，gt(),lt()方法包含边界，注意lt(7)是在取得gt(5)的结果上重新算下标的
+            //var $hideBrands = $("li:gt(5):not(:last)")  //第二种写法
+
+            //第二步，进行切换显示隐藏操作
+
+
+            $(".showmore").click(function(){
+                /*1，隐藏，注意“其他品牌”这个<li>不隐藏,隐藏后把<span>内容改为“显示全部品牌”
+                     切换显示全部和隐藏首先要判断“部分品牌”是否显示*/
+                if ($hideBrands.is(":visible")) {  //注意 is(..)方法的用法
+                    $hideBrands.hide();
+                    $(".showmore > a > span").html("显示全部品牌");  //这里使用了多层次选择器
+                } else {
+                //2,如果是隐藏的则改为显示
+                    $hideBrands.show();
+                    $(".showmore > a > span").html("隐藏部分品牌");
+                    //额外要求：指定标签高亮显示,下面是通过增加属性class="promoted",然后同css文件来设置高亮格式
+                    $("li:contains('佳能'),li:contains('索尼'),li:contains('松下')").addClass("promoted");
+                }
+
+                return false;  //返回值false, 表示取消<a>标签的默认行为，即不要发送到超链接了。
+            });
+
+        });
+
+    </script>
+</head>
+
+<body>
+
+<div class="SubCategoryBox">
+    <ul>
+        <li ><a href="#">佳能</a><i>(30440) </i></li>
+        <li ><a href="#">索尼</a><i>(27220) </i></li>
+        <li ><a href="#">三星</a><i>(20808) </i></li>
+        <li ><a href="#">尼康</a><i>(17821) </i></li>
+        <li ><a href="#">松下</a><i>(12289) </i></li>
+        <li ><a href="#">卡西欧</a><i>(8242) </i></li>
+        <li ><a href="#">富士</a><i>(14894) </i></li>
+        <li ><a href="#">柯达</a><i>(9520) </i></li>
+        <li ><a href="#">宾得</a><i>(2195) </i></li>
+        <li ><a href="#">理光</a><i>(4114) </i></li>
+        <li ><a href="#">奥林巴斯</a><i>(12205) </i></li>
+        <li ><a href="#">明基</a><i>(1466) </i></li>
+        <li ><a href="#">爱国者</a><i>(3091) </i></li>
+        <li ><a href="#">其它品牌相机</a><i>(7275) </i></li>
+    </ul>
+    <div class="showmore">
+        <a href="more.html"><span>显示全部品牌</span></a>
+    </div>
+</div>
+
+</body>
+
+
+</html>

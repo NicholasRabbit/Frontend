@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10, 创建节点及插入节点来练习</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                //1,操作文本节点, 通过jquery对象的text()方法操作,
+                alert($("#bj").text());  //打印id="bj"的标签内容
+                $("#bj").text("南京");    //修改其内容为“南京”
+            });
+
+            $("#btn2").click(function(){
+                //2, 操作属性节点，调用attr()方法
+                $("#btn2").click(function(){
+                    //(1)":text"查找所有类型type值为"text"的标签，获取属性name='username'的，然后打印它的value属性的值
+                    alert($(":text[name='username']").attr("value"));
+                    //(2), 赋值操作, 还是用这个方法，方法重载，给"value"属性进行赋值
+                    $(":text[name='username']").attr("value","Tom");
+                });
+
+            });
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+<button id="btn1">通过jquery对象的text()方法操作,操作文本节点</button>  <br>
+<button id="btn2">操作属性节点，调用attr()方法</button> <br>
+
+<p>你喜欢哪个城市?</p>
+
+
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="Jerry"/>
+
+</body>
+</html>

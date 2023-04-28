@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性过滤选择器</title>
+    <style type="text/css">
+        div, span, p {
+            width: 140px;
+            height: 140px;
+            margin: 5px;
+            background: #aaa;
+            border: #000 1px solid;
+            float: left;
+            font-size: 17px;
+            font-family: Verdana;
+        }
+
+        div.mini {
+            width: 55px;
+            height: 55px;
+            background-color: #aaa;
+            font-size: 12px;
+        }
+
+        div.hide {
+            display: none;
+        }
+    </style>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+        //属性过滤器练习
+        $(function(){
+            //1,选择含有属性“title”的 div 标签
+            $("#btn1").click(function(){
+               $("div[title]").css("background", "pink");
+            });
+            //2,选择属性"title=test"的 div 标签
+            $("#btn2").click(function(){
+               $("div[title='test']").css("background", "orange");
+            });
+            //3,选择属性"title != test"的 div标签
+            $("#btn3").click(function(){
+               $("div[title!='test' ]").css("background", "orange");  //这种写法把不含有属性“title”的标签也选择了，有漏洞
+            });
+            //改善3的方案：选择含有title属性, 但值"title != test"不等于'test'的 div 标签
+            $("#btn8").click(function(){
+                $("div[title][title!='test']").css("background", "orange");
+            })
+
+            //4,选择属性“title = te...”的值以“te”开头的标签
+            $("#btn4").click(function(){
+               $("div[title^='te']").css("background", "orange");
+            });
+            //5,选择属性值“title = ...om”的值以"om"结尾的的标签
+            $("#btn5").click(function(){
+                $("div[title$='om']").css("background", "orange");
+            });
+            //6,选择属性值“title = ...es..”的值含有"es"的的标签
+            $("#btn6").click(function(){
+               $("div[title*='es']").css("background", "orange");
+            });
+            //7,组合选择，首先选择有属性“id”的div标签, 然后在此中选择含有属性“title=..es..”含有es的标签
+            $("#btn7").click(function(){
+               $("div[id][title*='es']").css("background", "orange");
+            });
+
+
+
+        });
+    </script>
+
+</head>
+<body>
+
+<input type="button" value="1,选取含有 属性title 的div标签" id="btn1"/>  <br>
+<input type="button" value="2,选取 属性title值等于'test'的div标签" id="btn2"/>  <br>
+<input type="button" value="3,选取 属性title值不等于'test'的div元素(没有属性title的也将被选中)." id="btn3"/>   <br>
+<input type="button" value="8,选取 含有 title 属性值, 且title 属性值不等于 test 的 div 标签" id="btn8"/>   <br>
+
+<input type="button" value="4,选取 属性title值 以'te'开始 的div标签" id="btn4"/> <br>
+<input type="button" value="5,选取 属性title值 以'om'结束 的div标签" id="btn5"/>    <br>
+<input type="button" value="6,选取 属性title值 含有'es'的div标签" id="btn6"/>   <br>
+<input type="button" value="7,组合属性选择器,首先选取有属性id的div元素，然后在结果中 选取属性title值 含有'es'的 div 标签" id="btn7"/>   <br>
+
+<br><br>
+<div class="one" id="one">
+    id 为 one,class 为 one 的div
+    <div class="mini">class为mini</div>
+</div>
+<div class="one" id="two" title="test">
+    id为two,class为one,title为test的div
+    <div class="mini" title="other">class为mini,title为other</div>
+    <div class="mini" title="test">class为mini,title为test</div>
+</div>
+<div class="one">
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini"></div>
+</div>
+<div class="one">
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini" title="tom">class为mini,title为tom</div>
+</div>
+<div style="display:none;" class="none">style的display为"none"的div</div>
+<div class="hide">class为"hide"的div</div>
+<div>
+    包含input的type为"hidden"的div<input type="hidden" value="123456789" size="8">
+</div>
+<div id="mover">正在执行动画的div标签</div>
+
+
+</body>
+</html>

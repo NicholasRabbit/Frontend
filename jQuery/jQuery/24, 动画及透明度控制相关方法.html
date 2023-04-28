@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>24, 动画控制相关方法</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //1, show(..),hide(..)方法,方法内可以加参数，表示展示或隐藏执行过程的时间,单位是毫秒
+            //   变化过程中同时改变高度和宽度
+            $(".head").toggle(function () {
+                $(".content").show(1000);
+            },function () {
+                $(".content").hide(1000);
+            });
+
+            //2, slideDown(), slideUp()方法，只改变高度
+            $("#btn1").toggle(function(){
+                $(".content").slideDown(500);
+            },function(){
+                $(".content").slideUp(500);
+            });
+
+            //3, fadeIn(),fadeOut()只改变透明度
+            $("#btn2").toggle(function(){
+                $(".content").fadeIn(2000);
+            },function(){
+                $(".content").fadeOut(2000);
+            });
+
+            //4, fadeTo(),逐渐改变透明度至指定值
+            $("#btn3").click(function(){
+                $(".content").show().fadeTo(2000,0.5);
+            })
+        });
+
+    </script>
+</head>
+<body>
+
+<button id="btn1">slideDown(), slideUp()方法</button>  <br><br>
+<button id="btn2">fadeIn(),fadeOut()只改变透明度</button>  <br><br>
+<button id="btn3">fadeTo(),逐渐改变透明度至指定值</button>  <br><br>
+
+<div id="panel">
+    <h5 class="head">什么是jQuery?</h5>
+    <div class="content">
+        jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+    </div>
+</div>
+
+</body>
+</html>

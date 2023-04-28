@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15, 删除remove(), 和清空点empty()方法的区别</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            //1，remove()删除方法，这里用到了隐式循环，点击<ul id="city">把所有的节点都循环删除了，包括整个<ul>和<li>子节点。
+            //   remove()方法就是把所有的都删除
+            $("#city").click(function(){
+                $(this).remove();
+            });
+
+            //2, empty()清空方法，指清空子节点，不去除父节点,即“<ul id="game">”父标签还在
+            $("#game").click(function(){
+                confirm("确定清空吗？");
+                $(this).empty();
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li id="sh">上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="Tom"/>
+
+</body>
+</html>

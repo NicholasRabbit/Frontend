@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19，html(..)，val(..)方法.</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            $("#btn1").bind("click",function(){
+
+                //1,html()方法，相当于DOM的innerHtml()方法，即向标签中间添加文本内容
+                $("#city").html("<li>Beijing</li>");  //这里直接把<ul id="city">中间的<li>全部替换成为"<li>Beijing</li>";
+
+                //2,val()方法复习
+                alert($("#user").val());
+                $("#user").val("Jerry");
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+<button id="btn1">测试</button>
+
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li id="sh">上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li id="pes">实况</li>
+    <li>极品飞车</li>
+    <li id="wc">魔兽</li>
+</ul>
+
+<p>你喜欢哪项运动</p>
+<ul id="sport">
+    <li id="soccer">足球</li>
+    <li id="baseball">棒球</li>
+    <li>篮球</li>
+    <li>乒乓球</li>
+</ul>
+
+<input id="user" type="text" name="username" value="Tom"/>
+</body>
+</html>

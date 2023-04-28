@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12, 插入节点其它方法insertAfter(..), insertBefore(..)</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //1, after()方法，插入节点到指定节点后面, 还有before()方法，用法一样
+            $("#btn1").click(function(){
+               $("#rl").after($("<li id='sc'>StarCraft</li>"));   //after()方法，要插入的节点作为宾语
+            });
+
+            //2, insertBefore(), insertAfter()，被插入的节点作主语
+            $("#btn2").click(function(){
+               $("<li id='pes'>实况足球</li>").insertBefore($("#wc"));
+            });
+            $("#btn3").click(function(){
+               $("<li id='fifa'>FIFA</li>").insertAfter($("#wc"));
+            });
+
+
+        })
+
+    </script>
+</head>
+<body>
+
+<button id="btn1">after()方法，插入节点到指定节点后面</button>  <br>
+<button id="btn2">insertBefore()方法，插入节点到指定节点前</button>  <br>
+<button id="btn3">insertAfter()方法，插入节点到指定节点后</button>  <br>
+
+<p>你喜欢哪个城市?</p>
+<ul id="city"><li id="bj" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li id="wc">WarCraft</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="atguigu"/>
+
+</body>
+</html>

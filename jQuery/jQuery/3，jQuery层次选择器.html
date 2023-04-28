@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery层次选择器练习</title>
+    <style type="text/css">    /*CSS注释用java的多行注释*/
+    div, span, p {
+        width: 140px;
+        height: 140px;
+        margin: 5px;
+        background: #aaa;
+        border: #000 1px solid;
+        float: left;
+        font-size: 17px;
+        font-family: Verdana;
+    }
+
+    div.class02 {
+        width: 55px;
+        height: 55px;
+        background-color: #aaa;
+        font-size: 12px;
+    }
+
+    div.hide {
+        display: none;
+    }
+    </style>
+</head>
+
+
+<body>
+<!--jQuery层次选择器练习-->
+<script type="text/javascript"  src="jquery-1.7/jquery-1.7.2.js"></script>
+
+<script type="text/javascript">
+    //通过DOM对象的层次关系来进行选择
+    //1,选择某范围内所有的，范例：选择body内的所有div标签
+    $(function(){
+       $("#btn1").click(function(){
+           $("body div").css("background", "#ffbbaa");   //“body div” : body中间用空格隔开，表示<body>标签中包含所有的<div>都被选中
+       }) ;
+    });
+    //2,选择<body>内所有是子标签的<div>,即只选择<body>的下一层级的<div>,而下下层级的不选，子<div>下层的<div>不选
+    $(function(){
+       $("#btn2").click(function(){
+           $("body > div").css("background","#bbffaa");
+       }) ;
+    });
+    //3,选择下一个紧相邻的元素，例，选择id为id02的下一个<div>，注意这里是表示紧紧相邻，如果不挨着的话选不到
+    $(function(){
+       $("#btn3").click(function(){
+         $("#id02 + div").css("background", "#bbffaa");  //加号“+”表示下一个
+       });
+    });
+    //4,选择一个元素后边的所有元素，例，选择id为id03后面的所有<div>
+    $(function(){
+       $("#btn4").click(function(){
+          $("#id03 ~ div").css("background", "#ff000080");
+       });
+    });
+    //5,同级选择范例，例，选择与<div id="id02">同级的所有<div>
+    $(function(){
+       $("#btn5").click(function(){
+          $("#id02").siblings("div").css("background", "#1E90FF");  //siblings表示同级
+       });
+    });
+    //6,选择后面的元素，这次不用紧邻了，直到找到下一个为止。例，选择<div id="id03">的后面的所有<span>
+    $(function(){
+        $("#btn6").click(function(){
+            $("#id03").nextAll("span").css("background", "#1E90FF");   //注意与第3中的加号“+”表示的紧邻做区分
+        });                   //span后面什么也不加表示所有，("span:first")表示选择第一个
+    });
+    //7，选择前面所有的元素。例，选择<div id="id03">前面所有的div
+    $(function(){
+        $("#btn7").click(function(){
+            $("#id03").prevAll("div").css("background", "#1E90FF");
+        });
+    });
+
+
+</script>
+
+
+
+
+
+
+
+<input type="button" value="选择 body 内的所有 div 元素" id="btn1" />    <br>
+<input type="button" value="在 body 内, 选择子元素是 div 的." id="btn2" />   <br>
+<input type="button" value="选择 id 为 id02 的下一个 div 元素" id="btn3" />  <br>
+<input type="button" value="选择 id 为 id03 的元素后面的所有 div 兄弟元素" id="btn4" />    <br>
+<input type="button" value="选择 与id02 同级的元素所有 div 兄弟元素" id="btn5" />     <br>
+<input type="button" value="选择 id 为 id03 的下一个 span 元素" id="btn6" />     <br>
+<input type="button" value="选择 id 为 id03 的元素前边的所有的 div 兄弟元素" id="btn7" />       <br>
+
+<br><br>
+<div class="class01" id="id01">
+    id 为 id01,class 为 id01 的div
+    <div class="class02">class为class02</div>
+</div>
+
+<div class="class01" id="id02" title="test">
+    id为id02,class为class01,title为test的div
+    <div class="class02" title="other">class为class02,title为other</div>
+    <div class="class02" title="test">class为class02,title为test</div>
+</div>
+
+<div class="class01" id="id03">
+    id为id03,class为class01的div
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02"></div>
+</div>
+
+<div class="class01">
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02" title="test">class为class02,title为test</div>
+</div>
+
+<div style="display:none;" class="none">style的display为"none"的div</div>
+
+<div class="hide">class为"hide"的div</div>
+
+<div>
+    包含input的type为"hidden"的div<input type="hidden" size="8">
+</div>
+
+<span id="span">^^span标签^^</span>
+<span id="span02">--span元素--</span>
+</body>
+</html>
+
+

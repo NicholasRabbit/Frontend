@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>16, 员工列表添加删除使用jQuery完成</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        //使用jQuery实现员工的增加删除
+        $(function(){
+            //1,利用jQuery的remove()方法来移除表格的一行内容
+            /*(1)第一步使用层次选择器找到<a href=''>Delete</a>,绑定点击事件；
+            * (2)注意各种选择器的用法，例: find("td:first")等；
+            * (3)find(..)方法：查找子节点，返回的是子节点的jQuery对象；*/
+            function removeTr(aNode){  //aNode : 代表<a>标签
+                var $trNode = $(aNode).parent().parent();    //通过调用两层parent()方法，最终找到<tr>的jQuery的对象，方便以后进行删除
+                var nameContent = $trNode.find("td:first").text();  //找到第一个<td>中的值，即name的值，备后面删除提示语句用
+                nameContent = $.trim(nameContent);
+                var flag = confirm("确定删除" + nameContent + "的信息吗？");
+                if(flag){
+                    $trNode.remove();
+                }
+                return false;  //仅作前端删除节点，超链接不需发送请求到后台，所以这里返回false
+            }
+            //给<a>绑定点击事件
+            $("#employeeTable a").click(function(){
+               return removeTr(this);  //调用删除的回调函数
+            });
+
+            //2,添加数据到表格, 使用jQuery对象的连缀方法
+            $("#submitButton").click(function(){
+                $("<tr></tr>").append("<td>" + $("#name").val() + "</td>")   //依次获取<input>中id=name..等的值拼接成一个<td>标签
+                              .append("<td>" + $("#email").val() + "</td>")
+                              .append("<td>" + $("#salary").val() + "</td>")
+                              .append("<td><a href='deleteEmp?id=001'>Delete</a></td>")  //此句之前主语是$("<tr></tr>")
+                              .appendTo($("#employeeTable"))  //这里调用appendTo, 即把之前拼接的节点插入到表格里了
+                              .find('a').click(function(){    //通过表格对象找到<a>标签，并绑定点击事件
+                                 return removeTr(this);
+                              });
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+<!--员工列表-->
+<center>
+    <br> <br> 添加新员工 <br> <br>
+    name: <input type="text" name="name" id="name" />&nbsp;&nbsp;
+    email: <input type="text" name="email" id="email" />&nbsp;&nbsp;
+    salary: <input type="text" name="salary" id="salary" /> <br> <br>
+
+    <button id="submitButton" value="abc">Submit</button>
+    <br> <br>
+    <hr>
+    <br> <br>
+    <table id="employeeTable" border="1" cellpadding="5" cellspacing=0>
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="deleteEmp?id=001">Delete</a></td>
+        </tr>
+        <tr>
+            <td>
+                Jerry
+            </td>
+            <td>jerry@sohu.com</td>
+            <td>8000</td>
+            <td><a href="deleteEmp?id=002">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>bob@tom.com</td>
+            <td>10000</td>
+            <td><a href="deleteEmp?id=003">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</center>
+
+
+</body>
+</html>

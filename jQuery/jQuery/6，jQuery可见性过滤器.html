@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style type="text/css">
+        div, span, p {
+            width: 140px;
+            height: 140px;
+            margin: 5px;
+            background: #aaa;
+            border: #000 1px solid;
+            float: left;
+            font-size: 17px;
+            font-family: Verdana;
+        }
+
+        div.mini {
+            width: 55px;
+            height: 55px;
+            background-color: #aaa;
+            font-size: 12px;
+        }
+        /* “.hide”是类选择器写法，把类class值为hide的div设置为隐藏 */
+        div.hide {
+            display: none;
+        }
+    </style>
+    <title>6，可见性过滤器</title>
+</head>
+<body>
+
+<script text="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+<script text="text/javascript">
+    $(document).ready(function(){
+        //1, 选择所有可见的div标签
+        $("#btn1").click(function(){
+           $("div:visible").css("background", "green");
+        })
+        //2, 选择所有不可见的div标签
+        $("#btn2").click(function(){
+            alert($("div:hidden").length);   //不可见div标签集合的长度，即有几个不可见的<div>
+            /*(1)调用不可见<div>的show(..)方法，形参单位是毫秒，这个方法返回值就是<div>对象本身，因此向上面一样可使用".css(..)“方法对这对象进行设置,
+            *    即jQuery对象的方法可以连缀用，即一个jQuery对象调用方法后的返回值还是该对象本身，因此还可以继续调用对象的其它方法
+            * */
+            $("div:hidden").show(2000).css("background", "yellow");
+        });
+        //3, 选择所有不可见的<input>标签
+        $("#btn3").click(function(){
+            //attr(..)方法用法：获取隐藏的<input>标签的属性"value"属性的值，即value的赋值
+            alert($("input:hidden").attr("value"));
+            alert("type==>" + $("input:hidden").attr("type"));  //获取<input>中"type"属性的值
+            //val()用法,是直接打印属性"value"对应的值
+            alert("val()==>" + $("input:hidden").val());
+        });
+    });
+</script>
+
+
+<input type="button" value="选取所有可见的  div 元素" id="btn1">
+<input type="button" value="选择所有不可见的 div 元素" id="btn2" />
+<input type="button" value="选择所有不可见的 input 元素" id="btn3" />
+
+<br><br>
+<div class="one" id="one">
+    id 为 one,class 为 one 的div
+    <div class="mini">class为mini</div>
+</div>
+<div class="one" id="two" title="test">
+    id为two,class为one,title为test的div
+    <div class="mini" title="other">class为mini,title为other</div>
+    <div class="mini" title="test">class为mini,title为test</div>
+</div>
+<div class="one">
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini"></div>
+</div>
+<div class="one">
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini" title="tesst">class为mini,title为tesst</div>
+</div>
+<div style="display:none;" class="none">style的display为"none"的div</div>  <!--第一个隐藏的div-->
+<div class="hide">class为"hide"的div</div>  <!--第二个隐藏的div, 由上面的css代码控制隐藏-->
+<div>
+    包含input的type为"hidden"的div
+    <input type="hidden" value="Tom Jeffson" size="8">
+</div>
+
+
+
+</body>
+</html>

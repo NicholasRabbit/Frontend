@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery基本选择器</title>
+    <style type="text/css">    /*CSS注释用java的多行注释*/
+        div, span, p {
+            width: 140px;
+            height: 140px;
+            margin: 5px;
+            background: #aaa;
+            border: #000 1px solid;
+            float: left;
+            font-size: 17px;
+            font-family: Verdana;
+        }
+
+        div.class02 {
+            width: 55px;
+            height: 55px;
+            background-color: #aaa;
+            font-size: 12px;
+        }
+
+        div.hide {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+<!--jQuery基本选择器练习-->
+<script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+
+    //先写相当于window.onload的函数$(function(){})，然后在大括号里写其他函数
+    $(function(){
+        //1,id选择写法"#btn",注意带双引号,并绑定click事件,在大括号内执行函数，注意有多层嵌套
+        //  注意，一个id只能使用一次，而一个class可以被多次使用
+        $("#btn1").click(function(){
+            $("#id01").css("background", "#ffbbaa");  //设置id为"id01"的div的背景为粉色
+            $("#id01").css("background", "#1E90FF");  //一个id只能被使用一次，这个起作用，上行的就不起作用了
+        });
+        //2,class选择写法“.className”，
+        $("#btn2").click(function(){
+           $(".class02").css("background", "#ffbbaa");
+        });
+        //3,标签选择写法，标签名直接加引号，例"div"，选择标签名是div的所有标签,设置为红色
+        $("#btn3").click(function(){
+           $("div").css("background","#ff000080");
+        });
+        //4,选择所有写法:"*"
+        $("#btn4").click(function(){
+           $("*").css("background", "#1E90FF");
+        });
+        //5,多选，选择所有span标签和id为"id02"的元素，注意多选写法，是一个双引号把所有的括起来, 中间用逗号“，”隔开
+        $("#btn5").click(function(){
+           $("span,#id02").css("background","#1E90FF");
+        });
+    });
+
+
+
+</script>
+
+
+<input type="button" value="选择 id 为 01 的元素" id="btn1" />
+<input type="button" value="选择 class 为 class02 的所有元素" id="btn2" />
+<input type="button" value="选择 元素名是 div 的所有元素" id="btn3" />
+<input type="button" value="选择 所有的元素" id="btn4" />
+<input type="button" value="选择 所有的 span 元素和id为id02的元素" id="btn5" />
+
+<br><br>
+<div class="class01" id="id01">
+    id 为 id01,class 为 id01 的div
+    <div class="class02">class为class02</div>
+</div>
+<div class="class01" id="id02" title="test">
+    id为id02,class为class01,title为test的div
+    <div class="class02" title="other">class为class02,title为other</div>
+    <div class="class02" title="test">class为class02,title为test</div>
+</div>
+<div class="class01">
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02"></div>
+</div>
+<div class="class01">
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02">class为class02</div>
+    <div class="class02" title="tesst">class为class02,title为tesst</div>
+</div>
+<div style="display:none;" class="none">style的display为"none"的div</div>
+<div class="hide">class为"hide"的div</div>
+<div>
+    包含input的type为"hidden"的div<input type="hidden" size="8">
+</div>
+<span id="span">^^span标签^^</span>
+
+</body>
+</html>
+
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20,使用jQuery进行表单操作综合练习</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            //1,给“#address”和"password"的标签添加事件，当获取焦点时，value默认值值改为空;
+            //  ":text"表示匹配所有的单行文本框，即选择type="text"的<input>标签;
+            //  下面的事件用到了隐式迭代，因为":text"有多个。
+            $(":text").focus(function(){
+                //(1),首先获取value的值，判断是否为defaultValue
+                var v1 = $(this).val();
+                //(2),如果是默认值，则需要改为空，否则的话不要改，因为是用户输入的
+                if(v1 == this.defaultValue){  //这里的defaultValue是DOM的内置属性，就是value的默认值：“请输入邮箱地址”
+                    $(this).val("");   //注意这里不要直接写this,而是要写作jQuery对象"$(this)"
+                }
+            //2,失去焦点时，如果值为空""的话，则还原为默认值
+            }).blur(function(){   //这里用到了jQuery的方法的连缀用法
+                //(1),首先要后去value，并修剪掉前后的空格
+                var v2 = $(this).val();
+                v2 = $.trim(v2);
+                if(v2 == ""){
+                    $(this).val(this.defaultValue);
+                }
+            });
+
+            //3,选中单选下拉框的某一个项
+            $(":button:eq(1)").click(function () {   //jQuery的下标从0开始，这里是1，前面有个button了。
+                $("#single").val("橄榄球");
+            });
+
+            //4,使多选下拉框的“2号”和“4号”被选中
+            $(":button:eq(2)").click(function(){
+                $("#multiple").val(["2号","4号"]);  //注意这里<option>中间的值是value的值，注意与下面的checkbox区分
+            });
+
+            //5,使多选框的“多选2”和“多选4”被选中
+            $(":button:eq(3)").click(function(){
+               $(":checkbox[name='c']").val(["check2","check4"]);  //注意，这里的value值已经写好了
+            });
+
+            //6,使单选框的'单选2'被选中
+            $(":button:eq(4)").click(function(){
+                //因为“：radio”获取的是一个数组，所以即使是给一个元素赋值，也要加中括号“[]”,否则不起作用。
+                $(":radio[name='r']").val(["radio2"]);
+            });
+
+            //7,打印所有已经被选中的值
+            $(":button:eq(5)").click(function(){
+               //(1),val()方法可以获取<select>标签的value值，注意如果是multiple="multiple"的话，会打印一个数组
+                alert($("#single").val());    //输出：橄榄球
+                alert($("#multiple").val());  //输出：[2号，4号]
+                //(2),val()方法不可以获取<type = “checkbox”>的值，只能获取数组的头一个值，全部获取需要遍历
+                $(":checkbox[name='c']:checked").each(function(){
+                   alert("checkbox's value==>" + this.value);
+                });
+                //(3),type="radio"是单选，因此可用val()方法获取值
+                var rValue = $(":radio[name='r']:checked").val();    //获取被选中的radio也用"checked"
+                alert("radio's value==>" + rValue);
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+<input type="text" id="address" value="请输入邮箱地址"><br>
+<input type="text" id="password" value="请输入邮箱密码"><br>
+<input type="button" value="登录">
+
+<br><br><br>
+
+<input type="button" value="使单选下拉框的'橄榄球'被选中"/>   <br>
+<input type="button" value="使多选下拉框选中的'2号'和'4号'被选中"/><br>  <br>
+<input type="button" value="使多选框的'多选2'和'多选4'被选中"/>  <br>
+<input type="button" value="使单选框的'单选2'被选中"/><br>
+<input type="button" value="打印已经被选中的值"><br>
+
+<br/>
+
+<select id="single">
+    <option>足球</option>
+    <option>篮球</option>
+    <option>橄榄球</option>
+</select>
+<br><br>
+<select id="multiple" multiple="multiple" style="height:120px;">
+    <option selected="selected">1号</option>
+    <option>2号</option>
+    <option>3号</option>
+    <option>4号</option>
+    <option selected="selected">5号</option>
+</select>
+
+<br/><br/>
+
+<input type="checkbox" name="c" value="check1"/> 多选1
+<input type="checkbox" name="c" value="check2"/> 多选2
+<input type="checkbox" name="c" value="check3"/> 多选3
+<input type="checkbox" name="c" value="check4"/> 多选4
+
+<br/>
+
+<input type="radio" name="r" value="radio1"/> 单选1
+<input type="radio" name="r"  value="radio2"/> 单选2
+<input type="radio" name="r"  value="radio3"/> 单选3
+
+</body>
+</html>

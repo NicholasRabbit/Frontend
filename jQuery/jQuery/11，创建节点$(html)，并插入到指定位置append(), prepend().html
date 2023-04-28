@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11，创建节点，并插入到指定位置</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+        //创建节点，并插入节点到不同位置的常用方法
+        $(function(){
+
+            $("#btn1").click(function () {
+                //(1),创建节点，语法：$(html),即括号里写html语言，可以创建文本节点，属性节点，元素(标签)节点等
+                $("<li id='sf'>SanFrancisco</li>");  //直接得到节点的jQuery对象
+            });
+
+            $("#btn2").click(function () {
+                //(2)添加节点到后面，append(),appendTo(),两个都是把节点添加后面的位置，只是主语宾语互换位置
+                $("#city").append($("<li id='boston'>Boston</li>"));  //append()方法，接受添加的对象$("#city")作主语
+            });
+            $("#btn3").click(function(){
+               $("<li id='ny'>NewYork</li>").appendTo( $("#city") );  //appendTo()方法，即"添加到", 接收添加的对象$("#city")作宾语
+            });
+
+            //(3),prepend(),prependTo()添加节点到前面，用法与(2)中类似，也是主语位置不同
+            $("#btn4").click(function () {
+                $("#city").prepend($("<li id='saltLake'>Salt Lake City</li>"));  //prepend()用法
+                $("<li id='koln'>Koln</li>").prependTo($("#city"));   //prependo()用法
+                alert($("#koln").text());
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+
+<button id="btn1">创建节点</button>  <br>
+<button id="btn2">添加节点到后面，append()</button> <br>
+<button id="btn3">添加节点到后面,appendTo()</button> <br>
+<button id="btn4">添加节点到前面,prepend(),prependTo()</button> <br>
+
+<p>你喜欢哪个城市?</p>
+
+
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="Jerry"/>
+
+</body>
+
+</body>
+</html>

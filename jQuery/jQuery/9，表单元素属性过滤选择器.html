@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9，表单元素属性过滤选择器</title>
+
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            //注意冒号的用法
+            //1, 对表单内可用的input,即属性“disabled = false”或没有这个disabled属性的<input>赋值操作，disable默认是“false”
+            $("#btn1").click(function(){
+                //先打印下可用文本框,$(":text:enabled")表示可用的文本框对象，实际是一个数组
+                alert( $(":text:enabled").length );  //输出：2
+                $(":text:enabled").val("Hello Tom!");  //把所有可用的文本框赋值, val(..)形参里有值就是给这个对象赋值
+            });
+            //2, 对表单内不可用input进行赋值操作
+            $("#btn2").click(function(){
+               $(":text:disabled").val("username");
+            });
+            //3, 获取多选框被选中的个数
+            $("#btn3").click(function(){
+               var num = $(":checkbox[name='newsletter']:checked").length;
+               alert("多选框的个数==>" + num);
+            });
+            //4,获取多选框选中的内容
+            $("#btn4").click(function(){
+                //多选框的jQuery对象是一个数组，因此调用each()函数进行遍历，此中方式没有使用for循环，属于隐式遍历；
+                $(":checkbox[name='newsletter']:checked").each(function () {
+                    alert("checkbox value==>" + this.value);  //this代表当前循环的对象，注意这里是this.value,即获取“value”属性的值不是this.val()
+                });
+            });
+            //5,获取下拉框选中的内容, $("select")表示选择所有<select>标签
+            $("#btn5").click(function () {
+                //注意冒号前加空格表示选择子元素“<option>”, 否则的话就是选择<select>本身了
+                alert($("select :selected").length);  //输出：3，即两个下拉框的数量都都统计了
+                //由于$("select :selected")对象是一个数组，使用alet()打印时只显示第一个值
+                alert($("select :selected").val());  //输出：辽宁，即数组的第一个值
+                //遍历jQuery对象
+                $("select :selected").each(function(){
+                   alert("jQuery obj array==>" + this.value);
+                });
+            });
+
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+<h3>表单对象属性过滤选择器</h3>
+<button id="btn1">对表单内 可用的input 赋值操作.</button>  <br><br>
+<button id="btn2">对表单内 不可用的input 赋值操作.</button> <br><br>
+<button id="btn3">获取多选框选中的个数.</button>  <br><br>
+<button id="btn4">获取多选框选中的内容.</button>  <br><br>
+<button id="btn5">获取下拉框选中的内容.</button>  <br><br>
+
+<form id="form1" action="#">
+    可用元素: <input name="add" value="可用文本框1"/><br>
+    不可用元素: <input name="email" disabled="true" value="不可用文本框"/><br>
+    可用元素: <input name="che" value="可用文本框2"/><br>
+    不可用元素: <input name="name" disabled="true" value="不可用文本框"/><br>
+    <br>
+
+    多选框: <br>
+    <input type="checkbox" name="newsletter" value="football" checked="checked"/>足球
+    <input type="checkbox" name="newsletter" value="basketball" />篮球
+    <input type="checkbox" name="newsletter" value="rugby" />橄榄球
+    <input type="checkbox" name="newsletter" value="pingpong" checked="checked" />乒乓球
+    <input type="checkbox" name="newsletter" value="badminton" />羽毛球
+
+    <br><br>
+    下拉列表1: <br>
+    <select name="test" multiple="multiple" style="height: 100px">
+        <option>浙江</option>
+        <option selected="selected">辽宁</option>
+        <option>北京</option>
+        <option selected="selected">天津</option>
+        <option>广州</option>
+        <option>湖北</option>
+    </select>
+
+    <br><br>
+    下拉列表2: <br>
+    <select name="test2">
+        <option>浙江</option>
+        <option>辽宁</option>
+        <option selected="selected">北京</option>
+        <option>天津</option>
+        <option>广州</option>
+        <option>湖北</option>
+    </select>
+
+    <textarea rows="" cols=""></textarea>
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>23,事件的绑定,合成等-bind()，toggle()范例</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="jquery-1.7/jquery-1.7.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //1，事件的合成，指把两个或多个事件合并到一起，
+            //(1)为“.head”添加点击事件，若“.content”显示则隐藏，隐藏则显示
+            //(1.1)点击事件合并第一种写法：
+            $(".head").click(function(){
+                var flag = $(".content").is(":hidden");
+                if(flag){
+                    $(".content").show();
+                }else{
+                    $(".content").hide();
+                }
+            });
+            //(1.2)点击事件合并第二种写法：调用toggle()函数,此函数的作用时第一次点击执行第一个函数，再点击执行后面的函数，一直点击则循环执行函数
+            $("#aj").toggle(function () {
+                $("#div02").show();
+            },function(){      //多个函数中间用逗号“，”隔开，注意函数都要写在toggle()的括号内
+                $("#div02").hide();
+            });
+
+
+            //(2),为".head"添加鼠标的事件
+
+            //(2.1)鼠标悬停第一种写法：悬停:mouseover()，离开:mouseout()
+            /*$(".head03").mouseover(function(){
+                $(".content03").show();
+            }).mouseout(function () {
+                $(".content03").hide();
+            });*/
+
+            //(2.2)鼠标悬停的第二种写法，hover()方法：鼠标上去执行第一个函数，离开则执行第二个
+            $(".head03").hover(function(){
+                $(".content03").show();
+            },function () {
+                $(".content03").hide();
+            });
+
+            //2，bind()方法，为jQuery对象绑定事件,把事件作为实参放到括号里，作用与click等事件相同
+            $("#btn1").bind("click",function () {
+               alert("测试bind()!");
+            });
+
+        })
+
+    </script>
+</head>
+<body>
+
+<div id="panel">
+    <h5 class="head">什么是jQuery?</h5>
+    <div class="content">
+        jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+    </div>
+</div>
+<br><br>
+<div id="panel02">
+    <h5 id="aj" class="head02">什么是Ajax?</h5>
+    <div id="div02" class="content02">
+        Ajax是一种异步刷新技术，指在不刷新整个页面的情况下，指刷新页面的局部区域来发送请求，获取数据。
+    </div>
+</div>
+<br><br>
+<div id="panel03">
+    <h5 class="head03">什么是橄榄球?</h5>
+    <div class="content03">
+        类似橄榄的一种球。
+    </div>
+</div>
+<br><br>
+<button id="btn1">测试bind()</button>
+
+</body>
+</html>

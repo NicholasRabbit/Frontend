@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1，jQuery对象初步，及和DOM互转.html</title>
+</head>
+
+<body>
+<!--导入jquery库-->
+<script type="text/javascript"  src="jquery-1.7/jquery-1.7.2.js"></script>
+
+<script type="text/javascript">
+
+    /*一，jQuery初步知识
+    jQuery就是一个JavaScript的函数库
+    (1)$(function(){}) ：相当与javascript中的window.onload = function(){},代码写在大括号中间,
+                      是$(document).ready(function(){});的缩写
+    (2)$(function(){})在一个脚本块里可以写多个，但是window.onload只能写一个
+    二，$()表示jquery对象
+    */
+
+    //一个简单jquery程序的步骤
+    $(function(){
+        /*1,选取button对象，标签对象写法$("button"),直接把标签名字写进来就行
+          2,为标签添加单击句柄及其函数*/
+        $("button").click(function(){     //引号加标签名就表示获取了这个标签对象，也可以通过其他方式获取，如id,name,class等
+            //3，弹出内容
+            alert("Hello Jquery!");
+            alert($(this).text());   //这里$(this)代表$(button)这个jQuery对象，text()代表标签中间的值“确定”“btn01”,因此它是个数组
+
+            var $btn = $("button");       //因为有两个<button>标签，所有jQuery对象$btn代表一个数组,长度为2
+            alert("button===>" + $btn + "\n" + "$btn数组长度" + $btn.length);
+
+            /*二，jQuery对象和DOM对象互转 */
+            //1,jQuery对象转为DOM对象
+            alert("domObj==>" + $btn[0].firstChild.nodeValue);  //jQuery对象下表为0的的元素的值，是"确定"
+            //2，DOM对象转为jQuery对象
+            var btn01 = document.getElementById("btn01");
+            document.write($(btn01).text());   //输出：BTN01,即btn01标签中间的名字
+        })
+    });
+
+</script>
+
+
+
+<button>确定</button>   <br><br>
+
+<button id="btn01">BTN01</button>
+
+</body>
+</html>
